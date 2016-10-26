@@ -60,9 +60,9 @@ function shouldFetchSBItems(state, sbquery) {
 export function fetchSBItemsIfNeeded(sbquery) {
   return (dispatch, getState) => {
     if (shouldFetchSBItems(getState(), sbquery)) {
-      return dispatch(fetchSBItems(sbquery));
+      return dispatch(fetchSBItems(sbquery))
     }
-  };
+  }
 }
 
 export function filterSBItemsWithFiles(items) {

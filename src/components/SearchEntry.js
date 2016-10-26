@@ -8,7 +8,7 @@ export default class SearchEntry extends Component {
       <input type="text" id="sbsearch"
              onChange={e => onChange(e.target.value)}
              value={value} />
-      <button onClick={e => onChange({value})}>Search</button>
+      <button onClick={e => onSearch({value})}>Search</button>
       </span>
     );
   }

@@ -26,12 +26,11 @@ class AsyncApp extends Component {
   }
 
   handleSearchChange(nextsbquery) {
-    console.log("here")
     this.props.dispatch(selectSBQuery(nextsbquery));
   }
+
   handleSearchRequest(nextsbquery) {
-    console.log("here")
-    this.props.dispatch(selectSBQuery(nextsbquery));
+    this.props.dispatch(selectSBQuery(nextsbquery.value));
   }
 
   handleRefreshClick(e) {
