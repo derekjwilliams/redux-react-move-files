@@ -1,0 +1,69 @@
+diff --git a/src/actions/index.js b/src/actions/index.js
+index 84319b5..4a5b97b 100644
+--- a/src/actions/index.js
++++ b/src/actions/index.js
+@@ -36,6 +36,17 @@ function receivePosts(reddit, json) {
+ }
+ 
+ function fetchPosts(reddit) {
++  const search = 'water'
++  const url = `https://www.sciencebase.gov/catalog/items?q=${search}&format=json&fields=files,title,body`
++  return dispatch => {
++    dispatch(requestPosts(reddit));
++    return fetch(url)
++      .then(req => req.json())
++      .then(json => dispatch(receivePosts(reddit, json)));
++  }
++}
++
++function fetchPosts2(reddit) {
+   return dispatch => {
+     dispatch(requestPosts(reddit));
+     return fetch(`http://www.reddit.com/r/${reddit}.json`)
+@@ -62,3 +73,14 @@ export function fetchPostsIfNeeded(reddit) {
+     }
+   };
+ }
++
++export function filterItemsWithFiles(items) {
++  return items.filter(item =>
++    !((item.files === null) || (typeof item.files === 'undefined') || (!item.files.length))
++  )
++}
++export function filterItemsWithFiles(items) {
++  return items.filter(item =>
++    !((item.files === null) || (typeof item.files === 'undefined') || (!item.files.length))
++  )
++}
+diff --git a/src/components/SearchEntry.js b/src/components/SearchEntry.js
+index 834df2f..8484958 100644
+--- a/src/components/SearchEntry.js
++++ b/src/components/SearchEntry.js
+@@ -5,7 +5,7 @@ export default class SearchEntry extends Component {
+     const { value, onChange } = this.props;
+     return (
+       <span>
+-      <input type="text" 
++      <input type="text"
+              onChange={e => onChange(e.target.value)}
+              value={value} />
+       </span>
+diff --git a/tests/simple.spec.js b/tests/simple.spec.js
+index f2f240e..771839b 100644
+--- a/tests/simple.spec.js
++++ b/tests/simple.spec.js
+@@ -1,7 +1,11 @@
+ import fs from 'fs'
++import {filterItemsWithFiles, filterItemsWithoutFiles} from '../src/actions';
++
+ describe('actions', () => {
+-  it('placeholder, should create an action to add a todo', () => {
+-    const text = 'todo'
+-    expect('todo').toEqual('todo')
++  it('remove items with no files', () => {
++    const items = filterItemsWithFiles(JSON.parse(fs.readFileSync('tests/data/missingfiles.json', 'utf-8')).items)
++    expect(9).toEqual(items.length)
++    const itemsWithoutFiles = filterItemsWithoutFiles(items)
++    expect(0).toEqual(itemsWithoutFiles.length)
+   })
+ })

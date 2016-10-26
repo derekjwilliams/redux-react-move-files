@@ -1,0 +1,21 @@
+body {
+  font-family: "Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+}
+.scienceBaseItem  {
+  padding: 0.5rem;
+}
+.title {
+  font-weight: 700;
+  font-size: 1.0rem;
+  color: #2255aa;
+}
+.files {
+  font-size: 0.9rem;
+  margin-left: 4px;
+}
+.filelink {
+  color: #2255aa;
+}
+.filesize {
+  marginLeft: 1em;
+}
