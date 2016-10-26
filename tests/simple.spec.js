@@ -12,7 +12,7 @@ describe('actions', () => {
 describe('prefixes formatting using IEC 80000-13 with exact values', () => {
   const prefixes = ['K', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y']
   prefixes.forEach(function(p,i) {
-    it(`exactly ${p}iB`, () => {
+    it(`exactly 1 ${p}iB`, () => {
       const formattedCount = formatBytes(Math.pow(2,10 * (i + 1)))
       expect(formattedCount).toEqual(`1.0 ${p}iB`)
     })
@@ -22,7 +22,7 @@ describe('prefixes formatting using IEC 80000-13 with exact values', () => {
 describe('prefixes formatting using IEC 80000-13 with exact negative values', () => {
   const prefixes = ['K', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y']
   prefixes.forEach(function(p,i) {
-    it(`exactly -${p}iB`, () => {
+    it(`exactly -1 ${p}iB`, () => {
       const formattedCount = formatBytes(0 - Math.pow(2,10 * (i + 1)))
       expect(formattedCount).toEqual(`-1.0 ${p}iB`)
     })
@@ -40,7 +40,6 @@ describe('prefixes formatting using IEC 80000-13 with just a bit over values', (
     }
   })
 })
-
 
 describe('adhoc tests using IEC 80000-13 abbreviations', () => {
   const k = 1024;
